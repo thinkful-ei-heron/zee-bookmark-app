@@ -30,13 +30,13 @@ const getBookmarks = function() {
 
 
 // const addBookmark = function(title) {
-//     let newbookmark = {
+//      return  {
 //         title: "", required;
 //         url: "", required;
 //         description: "",
 //         rating: 1 - 5
 
-//     }
+//     };
 
 // }
 
@@ -47,14 +47,14 @@ const getBookmarks = function() {
 
 // }
 
-//user can remove bookmark from bookmark list
-const deleteBookmark = function(id) {
+// //user can remove bookmark from bookmark list
+// const deleteBookmark = function(id) {
     
-    }
+//     }
 
 
 
 
-export default {
+// export default {
 
-}
+// }
