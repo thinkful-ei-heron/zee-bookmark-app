@@ -5,26 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bookmarks Application</title>
+    <link href= "https://thinkful-list-api.herokuapp.com" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
+    <main aria-live="polite">
+    </main>
     <div class="container">
         <h1>Bookmarks</h1>
-    <form action="" id="bookmarks"></form>
-    <div>
-        <label for="name">Name</label>
-        <input type="text" placeholder="name" id="name" required></input>
-    </div>
-    <div>
-        <label for="name">Name</label>
-        <input type="text" placeholder="name" id="name" required></input>
-    </div>
-    <div>
-        <label for="name">Name</label>
-        <input type="text" placeholder="name" id="name" required></input>
-    </div>
-    <div>
-        <label for="name">Name</label>
-        <input type="text" placeholder="name" id="name" required></input>
+        <form id="js-bookmark-form"></form>
+            <label for="bookmark-entry">Add new bookmark</label>
+            <input 
+                type="text" 
+                name="bookmark-entry"
+                class="js-bookmark-entry"
+                placeholder="e.g. Google" required
+            />
+            <button type="enter">Add Bookmark</button>
+        </form>
+        </div>
+         <div>
+            <label for="bookmark-delete">Delete Bookmark</label>
+            <input 
+                type="button"  
+                name="bookmark-delete"
+                class="js-bookmark-delete" required
+            />
+        </div>
+        <ul class="bookmark-list js-bookmark-list"></ul>
     </div>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 

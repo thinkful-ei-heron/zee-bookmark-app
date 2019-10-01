@@ -1,50 +1,58 @@
-// const api.getBookmarks() {
-//     store.addBookmark()
-// };
-
 const url = 'https://thinkful-list-api.herokuapp.com';
 
-//user will be able to add a new bookmark
-//bookmark should include title, url, description, rating
-
-//functions working with store in store.js, api in api.js and so on
-
-//user can see a list of their bookmarks when they first open the app
-//list defaults to condensed view showing only title and rating
-const bookmarkList() = function() {
-    
-
+const getBookmarks = function() {
+    return function (`${url}/' '`);
 };
 
-//click a bookmark to display the detailed view
-//expands to also display description and "Visit Site" link
-const detailedBookmarks = function () {
-
-}
+// // const api.getBookmarks() {
+// //     store.addBookmark()
+// // };
 
 
-const addBookmark() = function() {
-    bookmarks {
-        title: "", required;
-        url: "", required;
-        description: "",
-        rating: 1 - 5
 
-    }
+// //user will be able to add a new bookmark
+// //bookmark should include title, url, description, rating
 
-}
+// //functions working with store in store.js, api in api.js and so on
 
-//use <select> element
-//user can select from dropdown a minimum rating to filter the list
-//by bookmarks rated at or above the chosen selection
-const dropdown() = function() {
+// //user can see a list of their bookmarks when they first open the app
+// //list defaults to condensed view showing only title and rating
+// const bookmarkList() = function() {
+    
 
-}
+// };
+
+// //click a bookmark to display the detailed view
+// //expands to also display description and "Visit Site" link
+// const detailedBookmarks = function () {
+
+// }
+
+
+// const addBookmark = function(title) {
+//     let newbookmark = {
+//         title: "", required;
+//         url: "", required;
+//         description: "",
+//         rating: 1 - 5
+
+//     }
+
+// }
+
+// //use <select> element
+// //user can select from dropdown a minimum rating to filter the list
+// //by bookmarks rated at or above the chosen selection
+// const dropdown() = function() {
+
+// }
 
 //user can remove bookmark from bookmark list
-const deleteBookmark() = function() {
+const deleteBookmark = function(id) {
+    
+    }
 
-}
+
 
 
 export default {
