@@ -52,7 +52,17 @@ const getBookmarks = function() {
     
 //     }
 
+// const fetchWrapper = function(...args) {
+//     let error;
+//     return fetch(...args) 
+//     .then(resp => {
+//         if(!resp.ok) {
+//             error = {code: resp.status};
+//         }
+//         return resp
 
+    })
+}
 
 
 // export default {

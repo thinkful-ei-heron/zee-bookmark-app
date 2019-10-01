@@ -24,21 +24,26 @@ const store = {
   const filter = 0;
 
 
-const addItem = function(newItem) {
-  this.bookmarks.push(newItem;
-}
+const addItem = function(name) {
+  try {
+    item.validateName(name);
+    this.items.push(item.create(name));
+  } catch (e) {
+    console.log(e.message)
+  }
+};
 
 const findById = function(id) {
-  return this.bookmarks.find(currentItem => currentItem.id === id);
+  return this.items.find(currentItem => currentItem.id === id);
 }
 
 const findAndDelete = function(id) {
-  this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
+  this.items = this.items.filter(currentItem => currentItem.id !== id);
 }
 
-const findAndUpdate = function(id, newData) {
+const findAndUpdate = function(id, name) {
   let currentItem = this.findById(id);
-  Object.assign(currentItem, newData);
+  Object.assign(currentItem, name);
 }
 
 const resetError = function() {
