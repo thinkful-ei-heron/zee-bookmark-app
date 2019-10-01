@@ -1,8 +1,12 @@
+import store from './store';
+import jQuery from 'jquery';
+
 const url = 'https://thinkful-list-api.herokuapp.com';
 
-const getBookmarks = function() {
-    return function (`${url}/' '`);
-};
+
+// const getBookmarks = function() {
+//     return function (`${url}/' '`);
+// };
 
 // // const api.getBookmarks() {
 // //     store.addBookmark()
