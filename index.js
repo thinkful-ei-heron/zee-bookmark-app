@@ -1,19 +1,19 @@
-//file that initialize the app
-import jQuery form 'jquery';
-import store.js from './store.js';
-import api.js from './api.js';
-import main.css from './main.css';
-import 'normalize.css';
+// //file that initialize the app
+// import jQuery form 'jquery';
+// import store.js from './store.js';
+// import api.js from './api.js';
+// import main.css from './main.css';
+// import 'normalize.css';
 
 
-function main() {
-    // getBookmarks.bindEventListeners();
-    // getBookmarks.render();
-    console.log('DOM is loaded');
+// function main() {
+//     // getBookmarks.bindEventListeners();
+//     // getBookmarks.render();
+//     console.log('DOM is loaded');
   
-    // const startMsg = $('<p>Webpack is working!</p>');
-    //   $('#root').append(startMsg);
-    render();
-  }
+//     // const startMsg = $('<p>Webpack is working!</p>');
+//     //   $('#root').append(startMsg);
+//     render();
+//   }
 
-  $(main);
+//   $(main);

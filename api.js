@@ -1,9 +1,31 @@
 import store from './store';
 import jQuery from 'jquery';
+import html from './index.html';
 
 const url = 'https://thinkful-list-api.herokuapp.com';
 
+// const generateBookmarkForm = function(bookmarkList) {
+//     return `
+//     <div class="container">
+//         <h1>Bookmarks</h1>
+//         <form id="js-bookmarks-form"></form>
+    
+// };
 
+
+// const handleNewItemSubmit = function() {
+//     $('#js-bookmarks-form').submit(function(event) {
+//         event.preventDefault();
+//         const newBookmark = $('.js-bookmarks-entry').val();
+//         $('js-bookmarks-entry').val('');
+//         store.addItem(newBookmark);
+//         render();
+
+//     })
+// }
+// const render = function() {
+//     let items = [...store.bookmarks];
+// }
 // const getBookmarks = function() {
 //     return function (`${url}/' '`);
 // };
