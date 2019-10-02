@@ -1,8 +1,8 @@
-import store from './store';
-import jQuery from 'jquery';
-import html from './index.html';
+// import store from './store';
+// import jQuery from 'jquery';
+// import html from './index.html';
 
-const url = 'https://thinkful-list-api.herokuapp.com';
+// const url = 'https://thinkful-list-api.herokuapp.com';
 
 // const generateBookmarkForm = function(bookmarkList) {
 //     return `

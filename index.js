@@ -1,3 +1,27 @@
+const APIKEY = 'https://thinkful-list-api.herokuapp.com';
+//function to handle the submit button
+function handleSubmitButton() {
+  $('#js-form').submit(event => {
+    event.preventDefault();
+    let value = parseInt($('#value').val());
+    console.log(handleSubmitButton);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // //file that initialize the app
 // import jQuery form 'jquery';
 // import store.js from './store.js';
