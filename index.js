@@ -3,7 +3,8 @@ import store from './store.js';
 import bookmarks from './bookmarks.js'
 
 const main = function() {
-    bookmarks.handleSubmitButton()    
-}
-
+  bookmarks.render();
+  bookmarks.handleSubmitButton();    
+};
+// api.getItem();
 $(main);

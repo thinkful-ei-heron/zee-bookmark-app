@@ -1,10 +1,11 @@
 import render from './bookmarks.js';
 import store from './store.js';
-import jQuery from 'jquery';
+// import jquery from 'jquery';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/zee';
 
 const listUrlFetch = function(...args) {
+  console.log(...args);
   let error;
   return fetch(...args)
     .then(response => {
@@ -22,17 +23,18 @@ const listUrlFetch = function(...args) {
         error.message = data.message;
         return Promise.reject(error);
       }
+      console.log(data);
       return data;
     });
 };
 
 const getItem = function() {
-  return listUrlFetch(`${BASE_URL}/items`);
+  return listUrlFetch(`${BASE_URL}/bookmarks`);
 };
 
-const createItem = function(name) {
-  const newItem = JSON.stringify({name});
-  return listUrlFetch(`${BASE_URL}/items`,
+const createItem = function(bookmark) {
+  const newItem = JSON.stringify(bookmark);
+  return listUrlFetch(`${BASE_URL}/bookmarks`,
     {
       method: 'POST',
       headers: {
@@ -44,7 +46,7 @@ const createItem = function(name) {
 
 const updateItem = function(id, updateData) {
   const newData = JSON.stringify(updateData);
-  return listUrlFetch(`${BASE_URL}/store/items`, {
+  return listUrlFetch(`${BASE_URL}/bookmarks/${id}`, {
     method: 'PATCH',
     hearders: {
       'Content-Type': 'application/json',
@@ -54,7 +56,7 @@ const updateItem = function(id, updateData) {
 };
 
 const deleteItem = function(id) {
-  return listUrlFetch(BASE_URL + '/items/' + id, {
+  return listUrlFetch(BASE_URL + '/bookmarks/' + id, {
     method: 'DELETE'
   });
 };

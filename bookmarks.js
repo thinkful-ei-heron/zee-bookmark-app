@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import store from './store.js';
 import api from './api.js';
 
@@ -81,21 +80,43 @@ function serializeJson(form) {
 function handleSubmitButton() {
   $('main').on('submit', event => {
     event.preventDefault();
-    let newBookMark = $('js-form')[0];
-    $('newBookMark').html('js-form');
+    const bookmarkData = $('#js-form').serializeArray();
+    let newBookmark = {title:bookmarkData[0].value, url:bookmarkData[1].value, desc:bookmarkData[2].value, 
+      rating:bookmarkData[3].value};
+    // $('newBookmark').html('js-form');
     store.adding = false;
-    console.log('submitButton works');
-    // render()
+    console.log(newBookmark);
+    api.createItem(newBookmark)
+      .then(function () {
+        render();
+      }
+      );
+  
   });
 }
 
 const render = function() {
-  $('js-form').html()
+  $('main').html(`
+    <button class='newBookmarkButton'>Add Bookmark</button>
+    <section id="results-list" class="js-results-list"></section>
+  `);
+  $('.newBookmarkButton').on('click', function(event) {
+    $('main').html(newBookmark());
+  });
+  api.getItem().then(function (response) {
+    store.bookmarks = response;
+    displayResults(store.bookmarks);
+  }).catch(function(error) {
+    console.log(error);
+  });
+  
+  
+};
   
 //ccheck if adding
 //if adding, call newBookMarkMade()
 //if !adding, call listAllBookmarks()
-}
+
 
 
 
@@ -106,55 +127,57 @@ const render = function() {
 
 // }
  
-// function displayResults (responseJson) {
-//   console.log(responseJson, typeof responseJson);
+function displayResults (responseJson = []) {
+  console.log(responseJson, typeof responseJson);
+  for(let i = 0; i < responseJson.length; i++) {
+    $('#results-list').append(`
+      <div class='condensed-view' id='condensed-${responseJson[i].id}'> 
+        <p>${i+1}. Title: ${responseJson[i].title}</p>
+        <p>Rating: ${responseJson[i].rating}</p>
+    
+      <div class='expanded-view' hidden id='expanded-${responseJson[i].id}'>
+        <p>Link: <a href="">${responseJson[i].url}</a></p>
+        <p>Description: ${responseJson[i].desc}</p>
+        <button class='delete-button' id='${responseJson[i].id}'>Delete</button>
+      </div>
+      </div>
+      `);
 
-//   for(let i = 0; i < responseJson.length; i++) {
-//     $('.results-list').append(`
-//         <p?${i+1}.${response.Json[i].name}</p>
-//         <a href="">${responseJson[i].url}
-//         <p>${responseJson[i].description}</p>`);
-//   }
-// }
+    $('.condensed-view').on('click', function(event) {
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      console.log(event);
+      //event.currentTarget is the condensed div
+      //we can get the id from that div
+      //we can take a substring to get everything afte the dash
+      //thats that bookmark id
+      //with that bookmarks id we can add expanded-follwed by bookmark id
+      //then update the elements with that id to remove
+      //the hidden attributes
+      
+    });
+
+    $('.delete-button').on('click', function(event) {
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      api.deleteItem(event.target.id)
+        .then(function() {
+          render();
+        });
+    });
+  }
+}
 
 
 
 
 
-// const handleNewItemSubmit = function() {
-//     $('#js-bookmarks-form').submit(function(event) {
-//         event.preventDefault();
-//         const newBookmark = $('.js-bookmarks-entry').val();
-//         $('js-bookmarks-entry').val('');
-//         store.addItem(newBookmark);
-//         render();
 
-//     })
-// }
-// const render = function() {
-//     let items = [...store.bookmarks];
-// }
-// const getBookmarks = function() {
-//     return function (`${url}/' '`);
-// };
 
 // // const api.getBookmarks() {
 // //     store.addBookmark()
 // // };
 
-
-
-// //user will be able to add a new bookmark
-// //bookmark should include title, url, description, rating
-
-// //functions working with store in store.js, api in api.js and so on
-
-// //user can see a list of their bookmarks when they first open the app
-// //list defaults to condensed view showing only title and rating
-// const bookmarkList() = function() {
-    
-
-// };
 
 // //click a bookmark to display the detailed view
 // //expands to also display description and "Visit Site" link
@@ -203,5 +226,6 @@ const render = function() {
 
 export default{
   listAllBookmarks,
-  handleSubmitButton   
+  handleSubmitButton,
+  render   
 }
