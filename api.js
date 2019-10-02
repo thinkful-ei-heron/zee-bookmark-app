@@ -10,10 +10,15 @@ function handleSubmitButton() {
     event.preventDefault();
     let newBookmark = $('.js-form').val();
     $('#js-results-list').empty();
-    
-    
+    // enterNewBookmark();
   });
 }
+
+// const enterNewBookmark('js-form') {
+//     let allBookmark = `${BASE_URL}${'js-form}`;
+//     console.log(allBookmark)`
+
+// }
  
 function displayResults (responseJson) {
     console.log(responseJson, typeof responseJson);
