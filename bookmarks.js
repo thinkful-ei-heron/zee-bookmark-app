@@ -1,8 +1,41 @@
 
-const newBookmarkMade = function(){
+const newBookmark = function(){
   return `
-    
-    `
+  <form id="js-form">
+                <p>Title:</p>
+                    <label for="bookmarks-title"></label>
+                    <input 
+                        type="text" 
+                        name="bookmarks-title"
+                        class="js-bookmarks-title"
+                        placeholder="e.g. Google" required
+                    />
+                <p>Website:</p>
+                    <label for="bookmarks-url"></label>
+                    <input
+                        type="url"
+                        name="bookmarks-url"
+                        class="js-bookmarks-url"
+                        placeholder="e.g. https://www.google.com" required
+                    />
+                <p>Description:</p>
+                    <label for="bookmarks-description"></label>
+                    <input
+                        type="text"
+                        name="bookmarks-description"
+                        class="js-bookmarks-description"
+                        placeholder="e.g. Search Engine"
+                    />
+                <select id="bookmarks-rating" name="rating">
+                <p>Rating:</p>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                    <button type="submit" class="submitButton">Submit</button>
+                </form> `
 }
 
 const createBookmarkElement = function() {
@@ -15,6 +48,7 @@ const createBookmarkElement = function() {
 
 const listAllBookmarks = function() {
   return `
+  <p>
     
     `;
 };
@@ -42,14 +76,12 @@ function serializeJson(form) {
 }
     
 function handleSubmitButton() {
-  $('main').on('click', '.submitButton', event => {
-    //stop event default        | event.preventDefault()
-    console.log(handleSubmitButton());
+  $('main').submit('.submitButton', event => {
     event.preventDefault();
-    
-    let formElement = $('js-form')[0];
-    $('main').html(listAllBookmarks());
+  let newBookMark = $('js-form')[0];
+    $('main').html(('js-form');
     store.store.adding = false;
+    console.log(handleSubmitButton);
     // render()
   });
 }
