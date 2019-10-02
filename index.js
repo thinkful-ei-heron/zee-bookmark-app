@@ -6,5 +6,5 @@ const main = function() {
   bookmarks.render();
   bookmarks.handleSubmitButton();    
 };
-// api.getItem();
+
 $(main);

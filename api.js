@@ -1,11 +1,9 @@
 import render from './bookmarks.js';
 import store from './store.js';
-// import jquery from 'jquery';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/zee';
 
 const listUrlFetch = function(...args) {
-  console.log(...args);
   let error;
   return fetch(...args)
     .then(response => {
@@ -23,7 +21,6 @@ const listUrlFetch = function(...args) {
         error.message = data.message;
         return Promise.reject(error);
       }
-      console.log(data);
       return data;
     });
 };
@@ -69,12 +66,7 @@ export default{
 };
 
 
-//THING TO DO HERE
-//everything you do here affect the API/DB
-//Create item in api using fetch
-//Get items from api using fetch
-//update item in api using fetch
-//delete item in api using fetch
+
 
 
 

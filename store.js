@@ -33,24 +33,24 @@ const addItem = function(name) {
 
 const findById = function(id) {
   return this.store.bookmarks.find(currentItem => currentItem.id === id);
-}
+};
 
 const findAndDelete = function(id) {
   this.items = this.items.filter(currentItem => currentItem.id !== id);
-}
+};
 
 const findAndUpdate = function(id, name) {
   let currentItem = this.findById(id);
   Object.assign(currentItem, name);
-}
+};
 
 const resetError = function() {
   this.error = null;
-}
+};
 
 export default {
   addItem,
   findAndDelete,
   findAndUpdate,
   resetError,
-}
+};
