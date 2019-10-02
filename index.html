@@ -10,7 +10,41 @@
 <body>
     <main aria-live="polite">
         <h1>Bookmark Saver</h1>
-        
+        <form id="js-form">
+                <p>Title:</p>
+                    <label for="bookmarks-title"></label>
+                    <input 
+                        type="text" 
+                        name="bookmarks-title"
+                        class="js-bookmarks-title"
+                        placeholder="e.g. Google" required
+                    />
+                <p>Website:</p>
+                    <label for="bookmarks-url"></label>
+                    <input
+                        type="url"
+                        name="bookmarks-url"
+                        class="js-bookmarks-url"
+                        placeholder="e.g. https://www.google.com" required
+                    />
+                <p>Description:</p>
+                    <label for="bookmarks-description"></label>
+                    <input
+                        type="text"
+                        name="bookmarks-description"
+                        class="js-bookmarks-description"
+                        placeholder="e.g. Search Engine"
+                    />
+                <select id="bookmarks-rating" name="rating">
+                <p>Rating:</p>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                    <button type="submit" class="submitButton">Submit</button>
+                </form>
         <section id="results-list" class="js-results-list"></section>
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script type='module' src='./index.js'></script>

@@ -32,7 +32,7 @@ const addItem = function(name) {
 };
 
 const findById = function(id) {
-  return this.${store.bookmarks}.find(currentItem => currentItem.id === id);
+  return this.store.bookmarks.find(currentItem => currentItem.id === id);
 }
 
 const findAndDelete = function(id) {

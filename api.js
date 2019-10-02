@@ -3,11 +3,16 @@ import render from './bookmarks.js';
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/zee';
 
 const createItem = function() {
-  fetch(BASE_URL)
-    .then(response => response.json())
-    .then(responseJson => BASE_URL(responseJson));
-  render();
-};
+  return fetch(`${BASE_URL}/bookmarks`,
+  {
+    method: 'POST',
+    headers: "Content-Type: application/json",
+    body: 'js-form'
+
+  });
+   
+
+
 
 
 //THING TO DO HERE
@@ -22,30 +27,22 @@ const createItem = function() {
 
 
 
-
-
-
-
-
-
-
-
 // const enterNewBookmark('js-form') {
 //     let allBookmark = `${BASE_URL}${'js-form}`;
 //     console.log(allBookmark)`
 
 // }
  
-function displayResults (responseJson) {
-  console.log(responseJson, typeof responseJson);
+// function displayResults (responseJson) {
+//   console.log(responseJson, typeof responseJson);
 
-  for(let i = 0; i < responseJson.length; i++) {
-    $('.results-list').append(`
-        <p?${i+1}.${response.Json[i].name}</p>
-        <a href="">${responseJson[i].url}
-        <p>${responseJson[i].description}</p>`);
-  }
-}
+//   for(let i = 0; i < responseJson.length; i++) {
+//     $('.results-list').append(`
+//         <p?${i+1}.${response.Json[i].name}</p>
+//         <a href="">${responseJson[i].url}
+//         <p>${responseJson[i].description}</p>`);
+//   }
+// }
 
 
 
@@ -132,5 +129,6 @@ function displayResults (responseJson) {
 //}
 
 
-export default {
-}
+export default{
+    createItem
+};
