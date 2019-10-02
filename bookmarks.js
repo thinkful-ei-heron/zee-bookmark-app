@@ -1,9 +1,11 @@
 import store from './store.js';
 import api from './api.js';
 
+
 const newBookmark = function() {
   return `
-  <form id="js-form" class="js-bookmark-list">
+  <h1>Bookmark Saver</h1>
+    <form id="js-form" class="js-bookmark-list">
                 <p>Title:</p>
                     <label for="bookmarks-title"></label>
                     <input 
@@ -91,13 +93,18 @@ const render = function() {
  
 function displayResults (responseJson = []) {
   for(let i = 0; i < responseJson.length; i++) {
+    let hidden;
+    if(responseJson[i].condensed === true) {
+      hidden = 'hidden';
+    }
     $('#results-list').append(`
       <div class='condensed-view' id='condensed-${responseJson[i].id}'> 
         <p>${i+1}. Title: ${responseJson[i].title}</p>
         <p>Rating: ${responseJson[i].rating}</p>
-    
-      <div class='expanded-view' hidden id='expanded-${responseJson[i].id}'>
-        <p>Link: <a href="">${responseJson[i].url}</a></p>
+      <div class='expanded-view' ${hidden} id='expanded-${responseJson[i].id}'>
+        <p>Link: <a href="">${responseJson[i].url}</a>
+        <button class='visit-site-button' id='${responseJson[i].id}'>Visit Site</button> 
+        </p>
         <p>Description: ${responseJson[i].desc}</p>
         <button class='delete-button' id='${responseJson[i].id}'>Delete</button>
       </div>
@@ -107,7 +114,10 @@ function displayResults (responseJson = []) {
     $('.condensed-view').on('click', function(event) {
       event.stopPropagation();
       event.stopImmediatePropagation();
-      
+      api.toggleItem(event.target.id)
+        .then(function() {
+          render();
+        });
       //select all expanded views and give them the hidden attribute
       //event.currentTarget is the condensed div
       //we can get the id from that div
