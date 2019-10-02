@@ -1,7 +1,8 @@
+import store from './store.js';
 
-const newBookmark = function(){
+const newBookmark = function() {
   return `
-  <form id="js-form">
+  <form id="js-form" class="js-bookmark-list">
                 <p>Title:</p>
                     <label for="bookmarks-title"></label>
                     <input 
@@ -36,7 +37,7 @@ const newBookmark = function(){
                 </select>
                     <button type="submit" class="submitButton">Submit</button>
                 </form> `
-}
+};
 
 const createBookmarkElement = function() {
   return `
@@ -76,12 +77,12 @@ function serializeJson(form) {
 }
     
 function handleSubmitButton() {
-  $('main').submit('.submitButton', event => {
+  $('main').on('submit', event => {
     event.preventDefault();
-  let newBookMark = $('js-form')[0];
-    $('main').html(('js-form');
-    store.store.adding = false;
-    console.log(handleSubmitButton);
+    let newBookMark = $('js-form')[0];
+    $('newBookMark').html('js-form');
+    store.adding = false;
+    console.log('submitButton works');
     // render()
   });
 }
