@@ -2,15 +2,32 @@
 // import jQuery from 'jquery';
 // import html from './index.html';
 
-// const url = 'https://thinkful-list-api.herokuapp.com';
 
-// const generateBookmarkForm = function(bookmarkList) {
-//     return `
-//     <div class="container">
-//         <h1>Bookmarks</h1>
-//         <form id="js-bookmarks-form"></form>
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com';
+//function to handle the submit button
+function handleSubmitButton() {
+  $('#js-form').submit(event => {
+    event.preventDefault();
+    let newBookmark = $('.js-form').val();
+    $('#js-results-list').empty();
     
-// };
+    
+  });
+}
+ 
+function displayResults (responseJson) {
+    console.log(responseJson, typeof responseJson);
+
+    for(let i = 0; i < responseJson.length; i++) {
+        $('.results-list').append(`
+        <p?${i+1}.${response.Json[i].name}</p>
+        <a href="">${responseJson[i].url}
+        <p>${responseJson[i].description}</p>`);
+    }
+}
+
+
+$(handleSubmitButton);
 
 
 // const handleNewItemSubmit = function() {

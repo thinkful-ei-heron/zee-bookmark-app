@@ -35,12 +35,19 @@
                     class="js-bookmarks-description"
                     placeholder="e.g. Search Engine"
                 />
-                <p></p>
+            <select id="bookmarks-rating" name="rating">
+            <p>Rating:</p>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
                 <button type="submit" class="submitButton">Submit</button>
             </form>
         <section id="results-list" class="js-results-list"></section>
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
+        <script type='module'></script>
     </main>
 </body>
 </html>
