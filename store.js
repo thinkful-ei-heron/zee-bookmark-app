@@ -24,10 +24,10 @@ const store = {
 
 const addItem = function(name) {
   try {
-    item.validateName(name);
-    this.items.push(item.create(name));
+    store.validateName(name);
+    this.items.push(store.create(name));
   } catch (e) {
-    console.log(e.message)
+    console.log(e.message);
   }
 };
 
