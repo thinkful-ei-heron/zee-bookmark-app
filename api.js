@@ -1,18 +1,34 @@
-// import store from './store';
-// import jQuery from 'jquery';
-// import html from './index.html';
+import render from './bookmarks.js';
+
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com/zee';
+
+const createItem = function() {
+  fetch(BASE_URL)
+    .then(response => response.json())
+    .then(responseJson => BASE_URL(responseJson));
+  render();
+};
 
 
-const BASE_URL = 'https://thinkful-list-api.herokuapp.com';
-//function to handle the submit button
-function handleSubmitButton() {
-  $('#js-form').submit(event => {
-    event.preventDefault();
-    let newBookmark = $('.js-form').val();
-    $('#js-results-list').empty();
-    // enterNewBookmark();
-  });
-}
+//THING TO DO HERE
+//everything you do here affect the API/DB
+//Create item in api using fetch
+//Get items from api using fetch
+//update item in api using fetch
+//delete item in api using fetch
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const enterNewBookmark('js-form') {
 //     let allBookmark = `${BASE_URL}${'js-form}`;
@@ -21,18 +37,18 @@ function handleSubmitButton() {
 // }
  
 function displayResults (responseJson) {
-    console.log(responseJson, typeof responseJson);
+  console.log(responseJson, typeof responseJson);
 
-    for(let i = 0; i < responseJson.length; i++) {
-        $('.results-list').append(`
+  for(let i = 0; i < responseJson.length; i++) {
+    $('.results-list').append(`
         <p?${i+1}.${response.Json[i].name}</p>
         <a href="">${responseJson[i].url}
         <p>${responseJson[i].description}</p>`);
-    }
+  }
 }
 
 
-$(handleSubmitButton);
+
 
 
 // const handleNewItemSubmit = function() {
@@ -96,6 +112,9 @@ $(handleSubmitButton);
 // }
 
 // //user can remove bookmark from bookmark list
+//make call to delet from bookmarks and call upon api module to remove record
+//once receive response back then delete record out of store
+//re-render
 // const deleteBookmark = function(id) {
     
 //     }
@@ -109,10 +128,9 @@ $(handleSubmitButton);
 //         }
 //         return resp
 
-    })
+//    })
+//}
+
+
+export default {
 }
-
-
-// export default {
-
-// }

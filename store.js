@@ -15,13 +15,11 @@ const store = {
       url: 'http://www.title2.com',
       description: 'dolorum tempore deserunt',
       expanded: false
-    } 
-
-  ];
-
-  const adding = false;
-  const error = null;
-  const filter = 0;
+    }],
+  adding: false,
+  error: null,
+  filter: 0
+};
 
 
 const addItem = function(name) {
@@ -34,7 +32,7 @@ const addItem = function(name) {
 };
 
 const findById = function(id) {
-  return this.items.find(currentItem => currentItem.id === id);
+  return this.${store.bookmarks}.find(currentItem => currentItem.id === id);
 }
 
 const findAndDelete = function(id) {
@@ -51,11 +49,8 @@ const resetError = function() {
 }
 
 export default {
-  bookmarks,
   addItem,
   findAndDelete,
   findAndUpdate,
-  error,
   resetError,
-  
 }
