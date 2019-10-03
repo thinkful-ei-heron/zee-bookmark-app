@@ -30,14 +30,28 @@ const newBookmark = function () {
               class="js-bookmarks-description"
               placeholder="e.g. Search Engine"
           />
-      <select id="bookmarks-rating" name="rating">
-      <legend>Rating:</legend>
-          <option value="5">5</option>
-          <option value="4">4</option>
-          <option value="3">3</option>
-          <option value="2">2</option>
-          <option value="1">1</option>
-      </select>
+      <fieldset class="stars id="bookmarks-rating" name="rating">
+        <div>
+          <input class="star star-1" id="star-1" type="radio" name="rating" value="1" checked/>
+          <label class="star star-1" for="star-1"><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
+        </div>
+        <div>
+          <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/>
+          <label class="star star-2" for="star-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
+        </div>
+        <div>
+          <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/>
+          <label class="star star-3" for="star-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
+        </div>
+        <div>
+          <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/>
+          <label class="star star-4" for="star-4"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></label>
+        </div>
+        <div>
+          <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/>
+          <label class="star star-5" for="star-5"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></label> 
+        </div>
+      </fieldset>  
           <button type="submit" class="submitButton">Submit</button>
       </form> `;
 };
@@ -104,10 +118,11 @@ function generateExpandBookmark(bookmark) {
   return `
     <div class='expanded-view'>
       <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
-      <p>Rating: ${bookmark.rating}</p>
+      <h2>Rating: ${bookmark.rating}</h2>
       <div id='expanded-${bookmark.id}'>
-        <p>Link: <a href="">${bookmark.url}</a>
-          <button class='visit-site-button' id='${bookmark.id}'>Visit Site</button> 
+        <p>Link: 
+          <button type='url'<a href="">${bookmark.url}</a> 
+          class='visit-site-button' id='${bookmark.id}'>Visit Site</button> 
         </p>
         <p>Description: ${bookmark.desc}</p>
         <button class='delete-button' id='${bookmark.id}'>Delete</button>
@@ -115,13 +130,12 @@ function generateExpandBookmark(bookmark) {
     </div>`;
 }
 
-function handleToggle() {
+function handleToggle () {
   $('main').on('click', '.title', function (event) {
     this.toggleItem(event.currentTarget.id);
-  });
-}    
+})   
 
-const handleFilterRatings() = function () {
+function handleFilterRatings () {
   $('#js-form').on('change', '.filter', function () {
     let filter = parseInt($(this).val(), 10);
     bookmarks.filterBookmarks(filter);
