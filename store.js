@@ -1,4 +1,40 @@
-const store = {
+const addItem = function (jsonResponseObj) {
+  try {
+    // this.validateName(name);
+    const storeObj = { ...jsonResponseObj, expanded: false };
+    this.bookmarks.push(storeObj);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+const findById = function (id) {
+  return this.bookmarks.find(currentItem => currentItem.id == id);
+};
+
+const findAndDelete = function (id) {
+  this.items = this.items.filter(currentItem => currentItem.id !== id);
+};
+
+const findAndUpdate = function (id, name) {
+  let currentItem = this.findById(id);
+  Object.assign(currentItem, name);
+};
+
+// const findAndFilter
+
+const toggleItem = function (id) {
+  console.log(this);
+  const currentItem = this.findById(id);
+  console.log(currentItem);
+  currentItem.expanded = !currentItem.expanded;
+};
+
+const resetError = function () {
+  this.error = null;
+};
+
+export default {
   bookmarks: [
     {
       id: 'x56w',
@@ -18,48 +54,7 @@ const store = {
     }],
   adding: false,
   error: null,
-  filter: 0
-};
-
-
-const addItem = function(name) {
-  try {
-    store.validateName(name);
-    this.items.push(store.create(name));
-  } catch (e) {
-    console.log(e.message);
-  }
-};
-
-const findById = function(id) {
-  return store.bookmarks.find(currentItem => currentItem.id == id);
-};
-
-const findAndDelete = function(id) {
-  this.items = this.items.filter(currentItem => currentItem.id !== id);
-};
-
-const findAndUpdate = function(id, name) {
-  let currentItem = this.findById(id);
-  Object.assign(currentItem, name);
-};
-
-// const findAndFilter
-
-const toggleItem = function(id) {
-  const currentItem = this.findById(id);
-  if(currentItem.expanded === true) {
-    currentItem.expanded = false;
-  } else {
-    currentItem.expanded = true;
-  }
-};
-
-const resetError = function() {
-  this.error = null;
-};
-
-export default {
+  filter: 0,
   addItem,
   findById,
   findAndDelete,

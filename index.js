@@ -3,9 +3,11 @@ import store from './store.js';
 import bookmarks from './bookmarks.js'
 
 
-const main = function() {
+const main = function () {
+
+  bookmarks.handleToggle();
+  bookmarks.handleSubmitButton();
   bookmarks.render();
-  bookmarks.handleSubmitButton();    
 };
 
 $(main);
