@@ -6,7 +6,7 @@ const newBookmark = function () {
   return `
   <h1>Bookmark Saver</h1>
     <form id="js-form" class="js-bookmark-list">
-     <p>Title:</p>
+     <legend>Title:</legend>
           <label for="bookmarks-title"></label>
           <input 
               type="text" 
@@ -14,7 +14,7 @@ const newBookmark = function () {
               class="js-bookmarks-title"
               placeholder="e.g. Google" required
           />
-      <p>Website:</p>
+      <legend>Website:</legend>
           <label for="bookmarks-url"></label>
           <input
               type="url"
@@ -22,7 +22,7 @@ const newBookmark = function () {
               class="js-bookmarks-url"
               placeholder="e.g. https://www.google.com" required
           />
-      <p>Description:</p>
+      <legend>Description:</legend>
           <label for="bookmarks-description"></label>
           <input
               type="text"
@@ -31,7 +31,7 @@ const newBookmark = function () {
               placeholder="e.g. Search Engine"
           />
       <select id="bookmarks-rating" name="rating">
-      <p>Rating:</p>
+      <legend>Rating:</legend>
           <option value="5">5</option>
           <option value="4">4</option>
           <option value="3">3</option>
@@ -41,17 +41,6 @@ const newBookmark = function () {
           <button type="submit" class="submitButton">Submit</button>
       </form> `;
 };
-
-
-
-
-//         //find the id fo the item clicked   | fall findIdOfElement function, here in bookmarks.js
-//         //call on the api.deleteitem        | call a function that in the api module
-//         //wait for the response             | .then(etc...)
-//         //use same id to find the item in the store     | call a function in store.js that finds the item and resturns it
-//         //remove item from the store                    | call afunction in store.js that deltes item from store
-//         //rerender the page (shows all the imtes on the page)      | call a function here in bookmarks.js to re-render the page
-//     }
 
 function serializeJson(form) {
   const formData = new FormData(form);
@@ -68,10 +57,10 @@ function handleSubmitButton() {
       title: bookmarkData[0].value, url: bookmarkData[1].value, desc: bookmarkData[2].value,
       rating: bookmarkData[3].value
     };
-    store.adding = false;
+    this.adding = false;
     api.createItem(newBookmark)
       .then(function (res) {
-        store.addItem(res);
+        this.addItem(res);
         render();
       }
       );
@@ -92,10 +81,10 @@ const render = function () {
   api.getItem()
     .then(function (response) {
       response.forEach(bookmark => {
-        store.addItem(bookmark);
+        this.addItem(bookmark);
       });
 
-      displayResults(store.bookmarks);
+      displayResults(this.bookmarks);
 
     }).catch(function (error) {
     });
@@ -128,21 +117,22 @@ function generateExpandBookmark(bookmark) {
 
 function handleToggle() {
   $('main').on('click', '.title', function (event) {
-    store.toggleItem(event.currentTarget.id);
+    this.toggleItem(event.currentTarget.id);
   });
 }    
 
-function displayResults(bookmarks) {
-  console.log('bookmarks: ', bookmarks);
+function displayResults(bookmark) {
+  console.log('bookmarks: ', bookmark);
   bookmarks.forEach(bookmark => {
     if (bookmark.expanded === false) {
       $('#results-list').append(generateCondensedBookmark(bookmark));
     }
     else {
       $('#results-list').append(generateExpandedBookmark(bookmark));
-    }
+    };
+})
     
-const deleteBookmark = function(bookmar) {
+const deleteBookmark = function(bookmark) {
   $('main').on('click', 'delete-button', function (event) {
     // event.stopPropagation();
     // event.stopImmediatePropagation();
