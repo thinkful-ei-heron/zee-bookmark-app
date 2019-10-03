@@ -46,8 +46,8 @@ const findAndUpdate = function(id, name) {
 
 const toggleItem = function(id) {
   const item = findById(id);
-  
-}
+
+};
 
 const resetError = function() {
   this.error = null;

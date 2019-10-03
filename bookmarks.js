@@ -94,7 +94,7 @@ const render = function() {
 function displayResults (responseJson = []) {
   for(let i = 0; i < responseJson.length; i++) {
     let hidden;
-    if(responseJson[i].condensed === true) {
+    if(responseJson[i].expanded === false) {
       hidden = 'hidden';
     }
     $('#results-list').append(`
