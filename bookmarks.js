@@ -103,7 +103,7 @@ function generateExpandBookmark(bookmark) {
   console.log('exp')
   return `
     <div class='expanded-view'>
-      <p class='title' id='${bookmark.id}''>Title: ${bookmark.title}</p>
+      <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
       <p>Rating: ${bookmark.rating}</p>
       <div id='expanded-${bookmark.id}'>
         <p>Link: <a href="">${bookmark.url}</a>
@@ -121,8 +121,16 @@ function handleToggle() {
   });
 }    
 
+const handleFilterRatings() = function () {
+  $('#js-form').on('change', '.filter', function () {
+    let filter = parseInt($(this).val(), 10);
+    bookmarks.filterBookmarks(filter);
+    render();
+  });
+};
+
 function displayResults(bookmark) {
-  console.log('bookmarks: ', bookmark);
+  console.log('bookmarks:', bookmark);
   bookmarks.forEach(bookmark => {
     if (bookmark.expanded === false) {
       $('#results-list').append(generateCondensedBookmark(bookmark));
@@ -133,9 +141,9 @@ function displayResults(bookmark) {
 })
     
 const deleteBookmark = function(bookmark) {
-  $('main').on('click', 'delete-button', function (event) {
-    // event.stopPropagation();
-    // event.stopImmediatePropagation();
+  $('main').on('click', '.delete-button', function (event) {
+    event.stopPropagation();
+    event.stopImmediatePropagation();
     api.deleteItem(event.target.id)
       .then(function (res) {
         render();
