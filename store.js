@@ -22,21 +22,22 @@ const store = {
 };
 
 
-const addItem = function(name) {
+const addItem = function (jsonResponseObj) {
   try {
     // store.validateName(name);
-    this.items.push(this.create(name));
+    const storeObj = { ...jsonResponseObj, expanded: false};
+    this.bookmarks.push(storeObj);
   } catch (e) {
     console.log(e.message);
   }
 };
 
-const findById = function(id) {
+const findById = function (id) {
   return this.bookmarks.find(currentItem => currentItem.id == id);
 };
 
 const findAndDelete = function(id) {
-  this.items = this.items.filter(currentItem => currentItem.id !== id);
+  this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
 };
 
 const findAndUpdate = function(id, name) {
@@ -47,12 +48,10 @@ const findAndUpdate = function(id, name) {
 // const findAndFilter
 
 const toggleItem = function(id) {
+  console.log(this);
   const currentItem = this.findById(id);
-  if(currentItem.expanded === true) {
-    currentItem.expanded = false;
-  } else {
-    currentItem.expanded = true;
-  }
+  console.log(currentItem);
+  currentItem.expanded = !currentItem.expanded;
 };
 
 const resetError = function() {

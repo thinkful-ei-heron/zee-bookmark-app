@@ -4,9 +4,9 @@ import bookmarks from './bookmarks.js'
 
 
 const main = function() {
-  bookmarks.render();
-  console.log(store);
-  bookmarks.handleSubmitButton();    
+  bookmarks.handleToggle();
+  bookmarks.handleSubmitButton(); 
+  bookmarks.render();  
 };
 
 $(main);
