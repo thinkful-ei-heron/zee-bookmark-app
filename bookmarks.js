@@ -2,7 +2,7 @@ import store from './store.js';
 import api from './api.js';
 
 
-const newBookmark = function() {
+const newBookmark = function () {
   return `
   <h1>Bookmark Saver</h1>
     <form id="js-form" class="js-bookmark-list">
@@ -52,54 +52,56 @@ const newBookmark = function() {
 //         //remove item from the store                    | call afunction in store.js that deltes item from store
 //         //rerender the page (shows all the imtes on the page)      | call a function here in bookmarks.js to re-render the page
 //     }
-    
+
 function serializeJson(form) {
   const formData = new FormData(form);
   const o = {};
   formData.forEach((val, name) => o[name] = val);
   return JSON.stringify(o);
 }
-    
+
 function handleSubmitButton() {
   $('main').on('submit', event => {
     event.preventDefault();
     const bookmarkData = $('#js-form').serializeArray();
-    let newBookmark = {title:bookmarkData[0].value, url:bookmarkData[1].value, desc:bookmarkData[2].value, 
-      rating:bookmarkData[3].value};
+    let newBookmark = {
+      title: bookmarkData[0].value, url: bookmarkData[1].value, desc: bookmarkData[2].value,
+      rating: bookmarkData[3].value
+    };
     store.adding = false;
     api.createItem(newBookmark)
       .then(function () {
         render();
       }
       );
-  
+
   });
 }
 
-const render = function() {
+const render = function () {
   $('main').html(`
     <button class='newBookmarkButton'>Add Bookmark</button>
     <section id="results-list" class="js-results-list"></section>
   `);
-  $('.newBookmarkButton').on('click', function(event) {
+  $('.newBookmarkButton').on('click', function (event) {
     $('main').html(newBookmark());
   });
   api.getItem().then(function (response) {
     store.bookmarks = response;
     displayResults(store.bookmarks);
-  }).catch(function(error) { 
+  }).catch(function (error) {
   });
 };
- 
-function displayResults (responseJson = []) {
-  for(let i = 0; i < responseJson.length; i++) {
+
+function displayResults(responseJson = []) {
+  for (let i = 0; i < responseJson.length; i++) {
     let hidden;
-    if(responseJson[i].expanded === false) {
+    if (responseJson[i].expanded === false) {
       hidden = 'hidden';
     }
     $('#results-list').append(`
-      <div class='condensed-view' id='condensed-${responseJson[i].id}'> 
-        <p>${i+1}. Title: ${responseJson[i].title}</p>
+      <div class='condensed-view' id='${responseJson[i].id}'> 
+        <p>${i + 1}. Title: ${responseJson[i].title}</p>
         <p>Rating: ${responseJson[i].rating}</p>
       <div class='expanded-view' ${hidden} id='expanded-${responseJson[i].id}'>
         <p>Link: <a href="">${responseJson[i].url}</a>
@@ -111,36 +113,38 @@ function displayResults (responseJson = []) {
       </div>
       `);
 
-    $('.condensed-view').on('click', function(event) {
+    $('.condensed-view').on('click', function (event) {
       event.stopPropagation();
       event.stopImmediatePropagation();
-      api.toggleItem(event.target.id)
-        .then(function() {
+      store.toggleItem(event.target.id)
+        .then(function () {
           render();
         });
-      //select all expanded views and give them the hidden attribute
-      //event.currentTarget is the condensed div
-      //we can get the id from that div
-      //we can take a substring to get everything afte the dash
-      //thats that bookmark id
-      //with that bookmarks id we can add expanded-follwed by bookmark id
-      //then update the elements with that id to remove
-      //the hidden attributes
-      
-    });
+    })
 
-    $('.delete-button').on('click', function(event) {
+    //select all expanded views and give them the hidden attribute
+    //event.currentTarget is the condensed div
+    //we can get the id from that div
+    //we can take a substring to get everything afte the dash
+    //thats that bookmark id
+    //with that bookmarks id we can add expanded-follwed by bookmark id
+    //then update the elements with that id to remove
+    //the hidden attributes
+
+
+    $('.delete-button').on('click', function (event) {
       event.stopPropagation();
       event.stopImmediatePropagation();
       api.deleteItem(event.target.id)
-        .then(function() {
+        .then(function () {
           render();
         });
     });
   }
 }
 
-export default{
+
+export default {
   handleSubmitButton,
-  render   
+  render
 };

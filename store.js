@@ -32,7 +32,7 @@ const addItem = function(name) {
 };
 
 const findById = function(id) {
-  return this.store.bookmarks.find(currentItem => currentItem.id === id);
+  return store.bookmarks.find(currentItem => currentItem.id == id);
 };
 
 const findAndDelete = function(id) {
@@ -44,9 +44,15 @@ const findAndUpdate = function(id, name) {
   Object.assign(currentItem, name);
 };
 
-const toggleItem = function(id) {
-  const item = findById(id);
+// const findAndFilter
 
+const toggleItem = function(id) {
+  const currentItem = this.findById(id);
+  if(currentItem.expanded === true) {
+    currentItem.expanded = false;
+  } else {
+    currentItem.expanded = true;
+  }
 };
 
 const resetError = function() {
@@ -55,7 +61,9 @@ const resetError = function() {
 
 export default {
   addItem,
+  findById,
   findAndDelete,
   findAndUpdate,
-  resetError,
+  toggleItem,
+  resetError
 };
