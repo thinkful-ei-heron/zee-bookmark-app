@@ -30,7 +30,7 @@ const newBookmark = function () {
               class="js-bookmarks-description"
               placeholder="e.g. Search Engine"
           />
-      <fieldset class="stars id="bookmarks-rating" name="rating">
+      <fieldset class="stars id="bookmark-rating" name="rating">
         <div>
           <input class="star star-1" id="star-1" type="radio" name="rating" value="1" checked/>
           <label class="star star-1" for="star-1"><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
@@ -87,9 +87,9 @@ const render = function () {
     <button class='newBookmarkButton'>Add Bookmark</button>
     <section id="results-list" class="js-results-list"></section>
   `);
-  
+
   $('main').on('click', '.newBookmarkButton', function (event) {
- 
+
     $('main').html(newBookmark());
   });
   api.getItem()
@@ -108,67 +108,69 @@ function generateCondensedBookmark(bookmark) {
   console.log('cond')
   return `
     <div class='condensed-view'> 
-        <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
-        <p>Rating: ${bookmark.rating}</p>
+        <p class='title' id='${bookmark.id}'>${bookmark.title}</p>
+        <p>${bookmark.rating.id}</p>
     </div>
     `;
 }
+
 function generateExpandBookmark(bookmark) {
   console.log('exp')
   return `
     <div class='expanded-view'>
       <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
-      <h2>Rating: ${bookmark.rating}</h2>
+      <p>${bookmark.rating}</p>
       <div id='expanded-${bookmark.id}'>
-        <p>Link: 
+        <h2>Link: </h2>
+        <p>
           <button type='url'<a href="">${bookmark.url}</a> 
           class='visit-site-button' id='${bookmark.id}'>Visit Site</button> 
         </p>
-        <p>Description: ${bookmark.desc}</p>
+        <h2>Description: ${bookmark.desc}</h2>
         <button class='delete-button' id='${bookmark.id}'>Delete</button>
       </div>
     </div>`;
 }
 
-function handleToggle () {
+function handleToggle() {
   $('main').on('click', '.title', function (event) {
     this.toggleItem(event.currentTarget.id);
-})   
+  })
 
-function handleFilterRatings () {
-  $('#js-form').on('change', '.filter', function () {
-    let filter = parseInt($(this).val(), 10);
-    bookmarks.filterBookmarks(filter);
-    render();
-  });
-};
-
-function displayResults(bookmark) {
-  console.log('bookmarks:', bookmark);
-  bookmarks.forEach(bookmark => {
-    if (bookmark.expanded === false) {
-      $('#results-list').append(generateCondensedBookmark(bookmark));
-    }
-    else {
-      $('#results-list').append(generateExpandedBookmark(bookmark));
-    };
-})
-    
-const deleteBookmark = function(bookmark) {
-  $('main').on('click', '.delete-button', function (event) {
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-    api.deleteItem(event.target.id)
-      .then(function (res) {
-        render();
-      });
+  function handleFilterRatings() {
+    $('#js-form').on('change', '.filter', function () {
+      let filter = parseInt($(this).val(), 10);
+      bookmarks.filterBookmarks(filter);
+      render();
     });
-}
-    
- 
-export default {
-  handleSubmitButton,
-  handleToggle,
-  deleteBookmark,
-  render
-};
+  }
+
+  function displayResults(bookmark) {
+    console.log('bookmarks:', bookmark);
+    bookmarks.forEach(bookmark => {
+      if (bookmark.expanded === false) {
+        $('#results-list').append(generateCondensedBookmark(bookmark));
+      }
+      else {
+        $('#results-list').append(generateExpandedBookmark(bookmark));
+      };
+    })
+
+    const deleteBookmark = function (bookmark) {
+      $('main').on('click', '.delete-button', function (event) {
+        // event.stopPropagation();
+        // event.stopImmediatePropagation();
+        api.deleteItem(event.target.id)
+          .then(function (res) {
+            render();
+          });
+      });
+    }
+
+
+    export default {
+      handleSubmitButton,
+      handleToggle,
+      deleteBookmark,
+      render
+    };

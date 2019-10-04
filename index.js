@@ -6,6 +6,7 @@ import bookmarks from './bookmarks.js'
 const main = function() {
   bookmarks.handleToggle();
   bookmarks.handleSubmitButton(); 
+  bookmarks.handleFilterRatings();
   bookmarks.render();  
 };
 
