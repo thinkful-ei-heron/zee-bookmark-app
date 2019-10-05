@@ -30,31 +30,43 @@ const newBookmark = function () {
               class="js-bookmarks-description"
               placeholder="e.g. Search Engine"
           />
-      <fieldset class="stars id="bookmark-rating" name="rating">
-        <div>
-          <input class="star star-1" id="star-1" type="radio" name="rating" value="1" checked/>
-          <label class="star star-1" for="star-1"><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
-        </div>
-        <div>
-          <input class="star star-2" id="star-2" type="radio" name="rating" value="2"/>
-          <label class="star star-2" for="star-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
-        </div>
-        <div>
-          <input class="star star-3" id="star-3" type="radio" name="rating" value="3"/>
-          <label class="star star-3" for="star-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></label>
-        </div>
-        <div>
-          <input class="star star-4" id="star-4" type="radio" name="rating" value="4"/>
-          <label class="star star-4" for="star-4"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></label>
-        </div>
-        <div>
-          <input class="star star-5" id="star-5" type="radio" name="rating" value="5"/>
-          <label class="star star-5" for="star-5"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></label> 
-        </div>
-      </fieldset>  
+      <select id="bookmarks-rating" name="rating">
+      <legend>Rating:</legend>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+      </select> 
           <button type="submit" class="submitButton">Submit</button>
       </form> `;
 };
+
+const filterBookmark = function () {
+  return `
+  <h1>Bookmark Saver</h1>
+    <form id="js-filter" class="js-bookmark-filter">
+      <select id="bookmarks-rating" name="rating">
+      <legend>Rating:</legend>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+      </select> 
+          <button type="submit" class="submitButton">Submit</button>
+      </form> `;
+};
+
+function handleFilterButton() {
+  $('main').on('submit', '#js-filter', event => {
+    event.preventDefault();
+    const rating = event.target.rating.value;
+    const number = parseInt(rating);
+    store.setFilter(number);
+    render();
+  });
+}
 
 function serializeJson(form) {
   const formData = new FormData(form);
@@ -64,7 +76,7 @@ function serializeJson(form) {
 }
 
 function handleSubmitButton() {
-  $('main').on('submit', event => {
+  $('main').on('submit', '#js-form', event => {
     event.preventDefault();
     const bookmarkData = $('#js-form').serializeArray();
     let newBookmark = {
@@ -73,18 +85,19 @@ function handleSubmitButton() {
     };
     this.adding = false;
     api.createItem(newBookmark)
-      .then(function (res) {
-        this.addItem(res);
+      .then(function(res) {
+        store.addItem(res);
+        console.log(res);
         render();
       }
       );
-
   });
 }
 
 const render = function () {
   $('main').html(`
     <button class='newBookmarkButton'>Add Bookmark</button>
+    ${filterBookmark()}
     <section id="results-list" class="js-results-list"></section>
   `);
 
@@ -92,20 +105,24 @@ const render = function () {
 
     $('main').html(newBookmark());
   });
+  displayResults(store.bookmarks);
+};
+
+function getBookmarks() {
   api.getItem()
     .then(function (response) {
       response.forEach(bookmark => {
-        this.addItem(bookmark);
+        store.addItem(bookmark);
       });
 
-      displayResults(this.bookmarks);
+      displayResults(store.bookmarks);
 
     }).catch(function (error) {
     });
-};
+}
 
 function generateCondensedBookmark(bookmark) {
-  console.log('cond')
+  console.log('cond');
   return `
     <div class='condensed-view'> 
         <p class='title' id='${bookmark.id}'>${bookmark.title}</p>
@@ -115,7 +132,7 @@ function generateCondensedBookmark(bookmark) {
 }
 
 function generateExpandBookmark(bookmark) {
-  console.log('exp')
+  console.log('exp');
   return `
     <div class='expanded-view'>
       <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
@@ -134,43 +151,51 @@ function generateExpandBookmark(bookmark) {
 
 function handleToggle() {
   $('main').on('click', '.title', function (event) {
-    this.toggleItem(event.currentTarget.id);
-  })
+    store.toggleItem(event.currentTarget.id);
+    render();
+  });
+}
 
-  function handleFilterRatings() {
-    $('#js-form').on('change', '.filter', function () {
-      let filter = parseInt($(this).val(), 10);
-      bookmarks.filterBookmarks(filter);
-      render();
-    });
-  }
+// function handleFilterRatings() {
+//   $('#js-form').on('change', '.filter', function () {
+//     let filter = parseInt($(this).val(), 10);
+//     bookmarks.filterBookmarks(filter);
+//     render();
+//   });
+// }
 
-  function displayResults(bookmark) {
-    console.log('bookmarks:', bookmark);
-    bookmarks.forEach(bookmark => {
-      if (bookmark.expanded === false) {
-        $('#results-list').append(generateCondensedBookmark(bookmark));
-      }
-      else {
-        $('#results-list').append(generateExpandedBookmark(bookmark));
-      };
-    })
-
-    const deleteBookmark = function (bookmark) {
-      $('main').on('click', '.delete-button', function (event) {
-        // event.stopPropagation();
-        // event.stopImmediatePropagation();
-        api.deleteItem(event.target.id)
-          .then(function (res) {
-            render();
-          });
-      });
+function displayResults(bookmarks) {
+  console.log('bookmarks:', bookmarks);
+  bookmarks.forEach(bookmark => {
+    if(bookmark.rating < store.filter) {
+      return;
     }
+    if (bookmark.expanded === false) {
+      $('#results-list').append(generateCondensedBookmark(bookmark));
+    }
+    else {
+      $('#results-list').append(generateExpandBookmark(bookmark));
+    }
+  });
+}
 
+const handleDeleteBookmark = function () {
+  $('main').on('click', '.delete-button', function (event) {
+    // event.stopPropagation();
+    // event.stopImmediatePropagation();
+    api.deleteItem(event.currentTarget.id)
+      .then(function (res) {
+        store.findAndDelete(event.currentTarget.id);
+        render();
+      });
+  });
+};
 
-    export default {
-      handleSubmitButton,
-      handleToggle,
-      deleteBookmark,
-      render
-    };
+export default {
+  handleSubmitButton,
+  handleToggle,
+  getBookmarks,
+  handleDeleteBookmark,
+  handleFilterButton,
+  render
+};
