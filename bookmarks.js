@@ -56,8 +56,10 @@ const filterBookmark = function () {
               <option value="2">2</option>
               <option value="1">1</option>
       </select> 
-          <button type="submit" class="submitButton">Submit</button>
+        <button class='newBookmarkButton'>Add Bookmark</button>
+          ${filterBookmark()}
       </form> `;
+    
 };
 
 function handleFilterButton() {
@@ -128,7 +130,7 @@ function generateCondensedBookmark(bookmark) {
   return `
     <div class='condensed-view'> 
         <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
-        <p>Rating: ${bookmark.rating.id}</p>
+        <p>Rating: ${bookmark.rating}</p>
     </div>
     `;
 }
