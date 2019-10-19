@@ -43,23 +43,28 @@ const newBookmark = function () {
       </form> `;
 };
 
-// const filterBookmark = function () {
-//   return `
-//   <h1>Bookmark Saver</h1>
-//     <form id="js-filter" class="js-bookmark-filter">
-//       <select id="bookmarks-rating" name="rating">
-//               <option value="5">5</option>
-//               <option value="4">4</option>
-//               <option value="3">3</option>
-//               <option value="2">2</option>
-//               <option value="1">1</option>
-//       </select> 
-//           <button type="submit" class="submitButton">Submit</button>
-//       </form> `;
-// };
+const filterBookmark = function () {
+  return `
+  <h1>Bookmark Saver</h1>
+    <form id="js-filter" class="js-bookmark-filter">
+      <select id="bookmarks-rating" name="rating">
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+      </select> 
+      </form> `;
+};
+function handleFilterRatings() {
+  $('body').on('change', '.bookmarks-ratings', event => {
+    store.filter=event.currentTarget.value;
+    render();
+  });
+}
 
 function handleFilterButton() {
-  $('main').on('submit', '.bookmarks-ratings', event => {
+  $('main').on('submit', '#js-filter', event => {
     event.preventDefault();
     const rating = event.target.rating.value;
     const number = parseInt(rating);
@@ -124,7 +129,7 @@ function generateCondensedBookmark(bookmark) {
   console.log('cond');
   return `
     <div class='condensed-view'> 
-        <p class='title' id='${bookmark.id}'>${bookmark.title}</p>
+        <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
         <p>Rating: ${bookmark.rating.id}</p>
     </div>
     `;
@@ -150,13 +155,6 @@ function generateExpandBookmark(bookmark) {
 function handleToggle() {
   $('main').on('click', '.title', function (event) {
     store.toggleItem(event.currentTarget.id);
-    render();
-  });
-}
-
-function handleFilterRatings() {
-  $('body').on('change', '.bookmarks-ratings', event => {
-    store.filter=event.currentTarget.value;
     render();
   });
 }
