@@ -57,7 +57,7 @@ const filterBookmark = function () {
 };
 
 function handleFilterButton() {
-  $('main').on('submit', '#js-filter', event => {
+  $('main').on('submit', '#bookmarks-ratings', event => {
     event.preventDefault();
     const rating = event.target.rating.value;
     const number = parseInt(rating);
