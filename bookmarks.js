@@ -55,12 +55,6 @@ const filterBookmark = function () {
           </select> 
       </form> `;
 };
-function handleFilterRatings() {
-  $('main').on('change', '#js-filter', event => {
-    store.filter=event.currentTarget.value;
-    render();
-  });
-}
 
 function handleFilterButton() {
   $('main').on('submit', '#js-filter', event => {
