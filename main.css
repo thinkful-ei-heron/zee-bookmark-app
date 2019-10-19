@@ -38,12 +38,8 @@ input {
     font-size: 14px;
 }
 
-#js-bookmark-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
+.js-form {
+   
 }
 
 h3 {

@@ -6,7 +6,7 @@ const newBookmark = function () {
   return `
   <h1>Bookmark Saver</h1>
     <form id="js-form" class="js-bookmark-list">
-     <p>Title:</p>
+     <h3>Title:</h3>
           <label for="bookmarks-title"></label>
           <input 
               type="text" 
@@ -14,7 +14,7 @@ const newBookmark = function () {
               class="js-bookmarks-title"
               placeholder="e.g. Google" required
           />
-      <p>Website:</p>
+      <h3>Website:</h3>
           <label for="bookmarks-url"></label>
           <input
               type="url"
@@ -22,7 +22,7 @@ const newBookmark = function () {
               class="js-bookmarks-url"
               placeholder="e.g. https://www.google.com" required
           />
-      <p>Description:</p>
+      <h3>Description:</h3>
           <label for="bookmarks-description"></label>
           <input
               type="text"
@@ -30,7 +30,7 @@ const newBookmark = function () {
               class="js-bookmarks-description"
               placeholder="e.g. Search Engine"
           />
-          <p>Rating:</p>
+          <h3>Rating:</h3>
       <select id="bookmarks-rating" name="rating">
         
               <option value="5">5</option>
@@ -39,8 +39,9 @@ const newBookmark = function () {
               <option value="2">2</option>
               <option value="1">1</option>
       </select> 
+      <p></p>
           <button type="submit" class="submitButton">Submit</button>
-      </form> `;
+    </form> `;
 };
 
 const filterBookmark = function () {
@@ -64,7 +65,7 @@ function handleFilterButton() {
     event.preventDefault();
     const rating = event.target.rating.value;
     const number = parseInt(rating);
-    store.setFilter(number);
+    // store.setFilter(number);
     render();
   });
 }
@@ -126,7 +127,7 @@ function generateCondensedBookmark(bookmark) {
   console.log('cond');
   return `
     <div class='condensed-view'> 
-        <p class='title' id='${bookmark.id}'>${bookmark.title}</p>
+        <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
         <p>Rating: ${bookmark.rating.id}</p>
     </div>
     `;
