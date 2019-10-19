@@ -5,8 +5,8 @@ import api from './api.js';
 const newBookmark = function () {
   return `
   <h1>Bookmark Saver</h1>
-    <form id="js-form" class="js-bookmark-form">
-     <h3>Title:</h3>
+    <form id="js-form" class="js-bookmark-list">
+     <p>Title:</p>
           <label for="bookmarks-title"></label>
           <input 
               type="text" 
@@ -14,7 +14,7 @@ const newBookmark = function () {
               class="js-bookmarks-title"
               placeholder="e.g. Google" required
           />
-      <h3>Website:</h3>
+      <p>Website:</p>
           <label for="bookmarks-url"></label>
           <input
               type="url"
@@ -22,7 +22,7 @@ const newBookmark = function () {
               class="js-bookmarks-url"
               placeholder="e.g. https://www.google.com" required
           />
-      <h3>Description:</h3>
+      <p>Description:</p>
           <label for="bookmarks-description"></label>
           <input
               type="text"
@@ -30,34 +30,37 @@ const newBookmark = function () {
               class="js-bookmarks-description"
               placeholder="e.g. Search Engine"
           />
-          <h3>Rating:</h3>
+          <p>Rating:</p>
       <select id="bookmarks-rating" name="rating">
+        
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
       </select> 
-          <p></p>
           <button type="submit" class="submitButton">Submit</button>
       </form> `;
 };
 
 const filterBookmark = function () {
   return `
+  <h1>Bookmark Saver</h1>
     <form id="js-filter" class="js-bookmark-filter">
-          <select id="bookmarks-rating" name="rating">
+      <select id="bookmarks-rating" name="rating">
+      <legend>Rating: </legend>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
-          </select> 
+      </select> 
+          <button type="submit" class="submitButton">Submit</button>
       </form> `;
 };
 
 function handleFilterButton() {
-  $('main').on('submit', '#bookmarks-ratings', event => {
+  $('main').on('submit', '#js-filter', event => {
     event.preventDefault();
     const rating = event.target.rating.value;
     const number = parseInt(rating);
@@ -98,10 +101,11 @@ const render = function () {
     <button class='newBookmarkButton'>Add Bookmark</button>
     <section id="results-list" class="js-results-list"></section>
   `);
+
   $('main').on('click', '.newBookmarkButton', function (event) {
+
     $('main').html(newBookmark());
   });
-
   displayResults(store.bookmarks);
 };
 
@@ -122,7 +126,7 @@ function generateCondensedBookmark(bookmark) {
   console.log('cond');
   return `
     <div class='condensed-view'> 
-        <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
+        <p class='title' id='${bookmark.id}'>${bookmark.title}</p>
         <p>Rating: ${bookmark.rating.id}</p>
     </div>
     `;
@@ -151,6 +155,14 @@ function handleToggle() {
     render();
   });
 }
+
+// function handleFilterRatings() {
+//   $('#js-form').on('change', '.filter', function () {
+//     let filter = parseInt($(this).val(), 10);
+//     bookmarks.filterBookmarks(filter);
+//     render();
+//   });
+// }
 
 function displayResults(bookmarks) {
   console.log('bookmarks:', bookmarks);
