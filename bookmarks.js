@@ -5,8 +5,8 @@ import api from './api.js';
 const newBookmark = function () {
   return `
   <h1>Bookmark Saver</h1>
-    <form id="js-form" class="js-bookmark-list">
-     <legend>Title:</legend>
+    <form id="js-form" class="js-bookmark-form">
+     <h3>Title:</h3>
           <label for="bookmarks-title"></label>
           <input 
               type="text" 
@@ -14,7 +14,7 @@ const newBookmark = function () {
               class="js-bookmarks-title"
               placeholder="e.g. Google" required
           />
-      <legend>Website:</legend>
+      <h3>Website:</h3>
           <label for="bookmarks-url"></label>
           <input
               type="url"
@@ -22,7 +22,7 @@ const newBookmark = function () {
               class="js-bookmarks-url"
               placeholder="e.g. https://www.google.com" required
           />
-      <legend>Description:</legend>
+      <h3>Description:</h3>
           <label for="bookmarks-description"></label>
           <input
               type="text"
@@ -30,33 +30,35 @@ const newBookmark = function () {
               class="js-bookmarks-description"
               placeholder="e.g. Search Engine"
           />
+          <h3>Rating:</h3>
       <select id="bookmarks-rating" name="rating">
-      <legend>Rating:</legend>
+        
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
       </select> 
+          <p></p>
           <button type="submit" class="submitButton">Submit</button>
       </form> `;
 };
 
-const filterBookmark = function () {
-  return `
-  <h1>Bookmark Saver</h1>
-    <form id="js-filter" class="js-bookmark-filter">
-      <select id="bookmarks-rating" name="rating">
-      <legend>Rating:</legend>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-      </select> 
-          <button type="submit" class="submitButton">Submit</button>
-      </form> `;
-};
+// const filterBookmark = function () {
+//   return `
+//   <h1>Bookmark Saver</h1>
+//     <form id="js-filter" class="js-bookmark-filter">
+//       <select id="bookmarks-rating" name="rating">
+//       <legend>Rating: </legend>
+//               <option value="5">5</option>
+//               <option value="4">4</option>
+//               <option value="3">3</option>
+//               <option value="2">2</option>
+//               <option value="1">1</option>
+//       </select> 
+//           <button type="submit" class="submitButton">Submit</button>
+//       </form> `;
+// };
 
 function handleFilterButton() {
   $('main').on('submit', '#js-filter', event => {
@@ -96,8 +98,8 @@ function handleSubmitButton() {
 
 const render = function () {
   $('main').html(`
+   <h1>Bookmark Saver</h1>
     <button class='newBookmarkButton'>Add Bookmark</button>
-    ${filterBookmark()}
     <section id="results-list" class="js-results-list"></section>
   `);
 
@@ -126,7 +128,7 @@ function generateCondensedBookmark(bookmark) {
   return `
     <div class='condensed-view'> 
         <p class='title' id='${bookmark.id}'>${bookmark.title}</p>
-        <p>${bookmark.rating.id}</p>
+        <p>Rating: ${bookmark.rating.id}</p>
     </div>
     `;
 }
@@ -136,14 +138,13 @@ function generateExpandBookmark(bookmark) {
   return `
     <div class='expanded-view'>
       <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
-      <p>${bookmark.rating}</p>
+      <p>Rating: ${bookmark.rating}</p>
       <div id='expanded-${bookmark.id}'>
-        <h2>Link: </h2>
-        <p>
+        <p>Link: 
           <button type='url'<a href="">${bookmark.url}</a> 
           class='visit-site-button' id='${bookmark.id}'>Visit Site</button> 
         </p>
-        <h2>Description: ${bookmark.desc}</h2>
+        <p>Description: ${bookmark.desc}</p>
         <button class='delete-button' id='${bookmark.id}'>Delete</button>
       </div>
     </div>`;

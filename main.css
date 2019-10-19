@@ -1,3 +1,52 @@
 * {
     box-sizing: border-box;
 }
+
+body{
+  background-color: lightgray;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 50px;
+    border-bottom: 1px solid black;
+    padding : 10px;
+}
+
+.newBookmarkButton {
+  margin-left: 46%;
+  height: 30px;
+  border-radius: 10%;
+}
+
+.js-results-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+input {
+    border: 1px solid black;
+    height: 40px;
+    width: 300px;
+    font-size: 14px;
+}
+
+#js-bookmark-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight: bolder;
+}
+
