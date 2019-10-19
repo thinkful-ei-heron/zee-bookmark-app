@@ -45,19 +45,18 @@ const newBookmark = function () {
 
 const filterBookmark = function () {
   return `
-  <h1>Bookmark Saver</h1>
     <form id="js-filter" class="js-bookmark-filter">
-      <select id="bookmarks-rating" name="rating">
+          <select id="bookmarks-rating" name="rating">
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
-      </select> 
+          </select> 
       </form> `;
 };
 function handleFilterRatings() {
-  $('body').on('change', '.bookmarks-ratings', event => {
+  $('main').on('change', '#js-filter', event => {
     store.filter=event.currentTarget.value;
     render();
   });
