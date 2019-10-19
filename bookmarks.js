@@ -104,7 +104,6 @@ const render = function () {
     $('main').html(newBookmark());
   });
 
- 
   displayResults(store.bookmarks);
 };
 
