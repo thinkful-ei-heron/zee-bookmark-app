@@ -32,7 +32,6 @@ const newBookmark = function () {
           />
           <h3>Rating:</h3>
       <select id="bookmarks-rating" name="rating">
-        
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
@@ -49,7 +48,6 @@ const newBookmark = function () {
 //   <h1>Bookmark Saver</h1>
 //     <form id="js-filter" class="js-bookmark-filter">
 //       <select id="bookmarks-rating" name="rating">
-//       <legend>Rating: </legend>
 //               <option value="5">5</option>
 //               <option value="4">4</option>
 //               <option value="3">3</option>
@@ -61,7 +59,7 @@ const newBookmark = function () {
 // };
 
 function handleFilterButton() {
-  $('main').on('submit', '#js-filter', event => {
+  $('main').on('submit', '.bookmarks-ratings', event => {
     event.preventDefault();
     const rating = event.target.rating.value;
     const number = parseInt(rating);
@@ -102,11 +100,11 @@ const render = function () {
     <button class='newBookmarkButton'>Add Bookmark</button>
     <section id="results-list" class="js-results-list"></section>
   `);
-
   $('main').on('click', '.newBookmarkButton', function (event) {
-
     $('main').html(newBookmark());
   });
+
+ 
   displayResults(store.bookmarks);
 };
 
@@ -157,13 +155,12 @@ function handleToggle() {
   });
 }
 
-// function handleFilterRatings() {
-//   $('#js-form').on('change', '.filter', function () {
-//     let filter = parseInt($(this).val(), 10);
-//     bookmarks.filterBookmarks(filter);
-//     render();
-//   });
-// }
+function handleFilterRatings() {
+  $('body').on('change', '.bookmarks-ratings', event => {
+    store.filter=event.currentTarget.value;
+    render();
+  });
+}
 
 function displayResults(bookmarks) {
   console.log('bookmarks:', bookmarks);
