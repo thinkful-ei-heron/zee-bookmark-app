@@ -46,18 +46,15 @@ const newBookmark = function () {
 
 const filterBookmark = function () {
   return `
-  <h1>Bookmark Saver</h1>
     <form id="js-filter" class="js-bookmark-filter">
       <select id="bookmarks-rating" name="rating">
-      <legend>Rating: </legend>
+      <h3>Rating: </h3>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
       </select> 
-        <button class='newBookmarkButton'>Add Bookmark</button>
-          ${filterBookmark()}
       </form> `;
     
 };
@@ -101,14 +98,16 @@ function handleSubmitButton() {
 const render = function () {
   $('main').html(`
    <h1>Bookmark Saver</h1>
-    <button class='newBookmarkButton'>Add Bookmark</button>
+   <button class='newBookmarkButton'>Add Bookmark</button>
+      ${filterBookmark()}
     <section id="results-list" class="js-results-list"></section>
   `);
-
+    
   $('main').on('click', '.newBookmarkButton', function (event) {
 
     $('main').html(newBookmark());
   });
+  
   displayResults(store.bookmarks);
 };
 
