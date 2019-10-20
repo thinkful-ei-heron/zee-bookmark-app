@@ -109,11 +109,11 @@ const render = function () {
       $('main').html(newBookmark());
     });
 
-  $('main').on('change', '#js-filter',
+  $('main').on('change', '#bookmarks-rating',
     function (event) {
       console.log('this is working!');
-      $('main').html(filterBookmark());
-    })
+      
+    });
 
   displayResults(store.bookmarks);
 };
