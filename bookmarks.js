@@ -103,15 +103,10 @@ const render = function () {
     <section id="results-list" class="js-results-list"></section>
   `);
     
-  $('main').on('click', '.newBookmarkButton', '.filterBookmark',
-    function (event) {
-      $('main').html(newBookmark());
-    });
+  $('main').on('click', '.newBookmarkButton', function (event) {
 
-  $('main').on('change', '.filterBookmark',
-    function (event) {
-      $('main').html(filterBookmark());
-  }
+    $('main').html(newBookmark());
+  });
   
   displayResults(store.bookmarks);
 };
