@@ -57,7 +57,7 @@ const resetError = function() {
 };
 
 const setFilter = function(rating) {
-  this.filter = rating;
+  this.filter = parseInt(rating);
 }
 
 export default {

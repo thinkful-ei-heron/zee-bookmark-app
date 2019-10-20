@@ -48,11 +48,11 @@ const filterBookmark = function () {
   <form id="js-filter" class="js-bookmark-filter">
   <legend> Rating: </legend>
   <select id="bookmarks-filter" name="rating">
-          <option value="5" ${parseInt(store.filter) === 5 ? 'selected' : ''}>5</option>
-          <option value="4" ${parseInt(store.filter) === 4 ? 'selected' : ''}>4</option>
-          <option value="3" ${parseInt(store.filter) === 3 ? 'selected' : ''}>3</option>
-          <option value="2" ${parseInt(store.filter) === 2 ? 'selected' : ''}>2</option>
-          <option value="1" ${parseInt(store.filter) === 1 ? 'selected' : ''}>1</option>
+          <option value="5" ${store.filter === 5 ? 'selected' : ''}>5</option>
+          <option value="4" ${store.filter === 4 ? 'selected' : ''}>4</option>
+          <option value="3" ${store.filter === 3 ? 'selected' : ''}>3</option>
+          <option value="2" ${store.filter === 2 ? 'selected' : ''}>2</option>
+          <option value="1" ${store.filter === 1 ? 'selected' : ''}>1</option>
   </select>
   </form> `;
 };
