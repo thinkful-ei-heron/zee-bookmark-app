@@ -113,6 +113,7 @@ const render = function () {
     function (event) {
       const value = $(this).val();
       store.setFilter(value);
+      render();
       console.log($(this).val());
     });
 
@@ -175,6 +176,8 @@ function handleToggle() {
 // }
 
 function displayResults(bookmarks) {
+  bookmarks.filter(bookmark => 
+    console.log($(this).val()));
   console.log('bookmarks:', bookmarks);
   bookmarks.forEach(bookmark => {
     if (bookmark.rating < store.filter) {
