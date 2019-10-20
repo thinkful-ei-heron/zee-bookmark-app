@@ -32,7 +32,6 @@ const newBookmark = function () {
           />
           <h3>Rating:</h3>
       <select id="bookmarks-rating" name="rating">
-        
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
@@ -48,7 +47,7 @@ const filterBookmark = function () {
   return `
     <form id="js-filter" class="js-bookmark-filter">
       <legend> Rating: </legend>
-      <select id="bookmarks-rating" name="rating">
+      <select id="bookmarks-filter" name="rating">
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
@@ -109,7 +108,7 @@ const render = function () {
       $('main').html(newBookmark());
     });
 
-  $('main').on('change', '#bookmarks-rating',
+  $('main').on('change', '#bookmarks-filter',
     function (event) {
       const value = $(this).val();
       store.setFilter(value);
@@ -176,11 +175,7 @@ function handleToggle() {
 // }
 
 function displayResults(bookmarks) {
-  bookmarks.filter(bookmark => {
-    console.log($(this).val()));
-  }
-   
-  console.log('bookmarks:', bookmarks);
+ console.log('bookmarks:', bookmarks);
   bookmarks.forEach(bookmark => {
     if (bookmark.rating < store.filter) {
       return;
