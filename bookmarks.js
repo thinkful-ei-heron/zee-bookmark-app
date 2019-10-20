@@ -109,8 +109,9 @@ const render = function () {
       $('main').html(newBookmark());
     });
 
-  $('main').on('change', 'bookmarks-ratings',
+  $('main').on('change', '#js-filter',
     function (event) {
+      console.log('this is working!');
       $('main').html(filterBookmark());
     })
 
