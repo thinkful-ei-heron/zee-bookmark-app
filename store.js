@@ -24,7 +24,7 @@ const store = {
 
 const addItem = function (jsonResponseObj){ 
   try {
-    // store.validateName(name);
+
     const storeObj = { ...jsonResponseObj, expanded: false};
     this.bookmarks.push(storeObj);
   } catch (e) {
@@ -44,8 +44,6 @@ const findAndUpdate = function(id, name) {
   let currentItem = this.findById(id);
   Object.assign(currentItem, name);
 };
-
-// const findAndFilter
 
 const toggleItem = function(id) {
   console.log(this);

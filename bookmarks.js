@@ -111,8 +111,9 @@ const render = function () {
 
   $('main').on('change', '#bookmarks-rating',
     function (event) {
-      console.log('this is working!');
-      
+      const value = $(this).val();
+      store.setFilter(value);
+      console.log($(this).val());
     });
 
   displayResults(store.bookmarks);
