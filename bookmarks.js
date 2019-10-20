@@ -47,8 +47,8 @@ const newBookmark = function () {
 const filterBookmark = function () {
   return `
     <form id="js-filter" class="js-bookmark-filter">
+      <legend> Rating: </legend>
       <select id="bookmarks-rating" name="rating">
-      <h3>Rating: </h3>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
@@ -103,10 +103,11 @@ const render = function () {
     <section id="results-list" class="js-results-list"></section>
   `);
     
-  $('main').on('click', '.newBookmarkButton', function (event) {
-
-    $('main').html(newBookmark());
-  });
+  $('main').on('click', '.newBookmarkButton', '.filterBookmark',
+    function (event) {
+      $('main').html(newBookmark());
+      $('main').html(filterBookmark());
+    });
   
   displayResults(store.bookmarks);
 };
