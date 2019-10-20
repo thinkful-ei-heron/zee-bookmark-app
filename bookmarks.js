@@ -56,7 +56,7 @@ const filterBookmark = function () {
               <option value="1">1</option>
       </select> 
       </form> `;
-    
+
 };
 
 function handleFilterButton() {
@@ -86,7 +86,7 @@ function handleSubmitButton() {
     };
     this.adding = false;
     api.createItem(newBookmark)
-      .then(function(res) {
+      .then(function (res) {
         store.addItem(res);
         console.log(res);
         render();
@@ -102,12 +102,18 @@ const render = function () {
       ${filterBookmark()}
     <section id="results-list" class="js-results-list"></section>
   `);
-    
-  $('main').on('click', '.newBookmarkButton', function (event) {
 
-    $('main').html(newBookmark());
-  });
-  
+  $('main').on('click', '.newBookmarkButton',
+    function (event) {
+
+      $('main').html(newBookmark());
+    });
+
+  $('main').on('change', 'bookmarks-ratings',
+    function (event) {
+      $('main').html(filterBookmark());
+    })
+
   displayResults(store.bookmarks);
 };
 
@@ -169,7 +175,7 @@ function handleToggle() {
 function displayResults(bookmarks) {
   console.log('bookmarks:', bookmarks);
   bookmarks.forEach(bookmark => {
-    if(bookmark.rating < store.filter) {
+    if (bookmark.rating < store.filter) {
       return;
     }
     if (bookmark.expanded === false) {
