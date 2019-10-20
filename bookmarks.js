@@ -106,8 +106,12 @@ const render = function () {
   $('main').on('click', '.newBookmarkButton', '.filterBookmark',
     function (event) {
       $('main').html(newBookmark());
-      $('main').html(filterBookmark());
     });
+
+  $('main').on('change', '.filterBookmark',
+    function (event) {
+      $('main').html(filterBookmark());
+  }
   
   displayResults(store.bookmarks);
 };

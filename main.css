@@ -38,7 +38,10 @@ input {
     font-size: 14px;
 }
 
-.js-form {
+.js-bookmark-filter {
+    display: flex;
+    justify-content: center;
+   
    
 }
 
