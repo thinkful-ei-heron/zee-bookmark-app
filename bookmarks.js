@@ -176,8 +176,10 @@ function handleToggle() {
 // }
 
 function displayResults(bookmarks) {
-  bookmarks.filter(bookmark => 
+  bookmarks.filter(bookmark => {
     console.log($(this).val()));
+  }
+   
   console.log('bookmarks:', bookmarks);
   bookmarks.forEach(bookmark => {
     if (bookmark.rating < store.filter) {
