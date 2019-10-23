@@ -134,7 +134,8 @@ function generateCondensedBookmark(bookmark) {
   console.log('cond');
   return `
     <div class='condensed-view'> 
-        <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
+        <button class='titleButton'><p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
+        </button>
         <p>Rating: ${bookmark.rating}</p>
     </div>
     `;
@@ -143,12 +144,13 @@ function generateCondensedBookmark(bookmark) {
 function generateExpandBookmark(bookmark) {
   console.log('exp');
   return `
-    <div class='expanded-view'>
+    <div class='expanded-view' style="border:1px solid grey; 
+    border-radius: 5px; padding: 10px; cursor: pointer">
       <p class='title' id='${bookmark.id}'>Title: ${bookmark.title}</p>
       <p>Rating: ${bookmark.rating}</p>
       <div id='expanded-${bookmark.id}'>
         <p>Link: 
-          <a href="">${bookmark.url}</a> 
+        <a href=${bookmark.url}>${bookmark.url}</a>
         </p>
         <p>Description: ${bookmark.desc}</p>
         <button class='delete-button' id='${bookmark.id}'>Delete</button>
