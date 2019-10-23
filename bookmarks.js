@@ -148,8 +148,7 @@ function generateExpandBookmark(bookmark) {
       <p>Rating: ${bookmark.rating}</p>
       <div id='expanded-${bookmark.id}'>
         <p>Link: 
-          <button type='url'<a href="">${bookmark.url}</a> 
-          class='visit-site-button' id='${bookmark.id}'>Visit Site</button> 
+          <a href="">${bookmark.url}</a> 
         </p>
         <p>Description: ${bookmark.desc}</p>
         <button class='delete-button' id='${bookmark.id}'>Delete</button>
